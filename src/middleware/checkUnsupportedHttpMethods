@@ -1,0 +1,7 @@
+const checkUnsupportedHttpMethods = (req, res, next) => {
+        res.status(405).json({
+            message: `Method ${req.method} not implemented on ${req.originalUrl}`,
+        });
+    }
+
+module.exports = checkUnsupportedHttpMethods;

@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - 8082:8080
+    environment:
+      -  MONGO_URI=mongodb://mongodb:27017/school
+    volumes:
+      -  app_logs:/data/app_logs
+
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    ports: 
+      -  27017:27017
+    volumes:
+      -  mongodb_data:/data/db   
+
+volumes:
+  mongodb_data:    
+    name: mongodb_data
+  app_logs:
+    name: app_logs
+

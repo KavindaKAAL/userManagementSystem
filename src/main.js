@@ -1,14 +1,15 @@
-const env = require("./config/config");
+const config = require('config');
 const { initiate_app } = require("./app");
 
 const main = async ()=>{
 
-    const port = env.PORT || 8081;
+    const port = config.get('app.port');
+    const mongo_uri = config.get('db.uri');
     
-    const server = await initiate_app();
+    const server = await initiate_app(mongo_uri);
 
     server.listen(port,()=>{
-        console.log(`server is running on http://localhost:${port}`);
+        console.log(`server is running on port ${port}`);
     })
 
 } 

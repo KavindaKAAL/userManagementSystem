@@ -1,0 +1,11 @@
+{
+  "app": {
+    "port": 8080
+  },
+  "db": {
+    "uri": "mongodb://mongodb:27017/test_school"
+  },
+  "log": {
+    "level": "silent"
+  }
+}

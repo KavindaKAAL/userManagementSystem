@@ -2,6 +2,7 @@ const winston = require('winston');
 const { format } = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 const path = require('path');
+const config = require('config');
 
 const logFormat = format.combine(
   format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
@@ -33,7 +34,7 @@ const transports = [
 ];
 
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
+  level: config.get('log.level'),
   format: logFormat,
   transports,
   exitOnError: false,

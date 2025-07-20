@@ -25,7 +25,7 @@ const getStudentById = async (req,res)=>{
         }
         res.status(200).json(user);
     }catch(error){
-        logger.error('Error retrieving students', error);
+        logger.error('Error retrieving student', error);
         res.status(500).json({message: 'Error retrieving student'})
     }
 };
@@ -38,14 +38,14 @@ const createStudent = async (req,res)=>{
             return res.status(400).json({ error: 'Bad Request', message: errors.array()[0].msg});
         }
         const newUser = await Student.create(req.body);
-        logger.info("Create a student");
+        logger.info("Student created successfully");
         res.status(201).json({message: 'Student created successfully', student: newUser});
     }catch(error){
         if (error.code === 11000 && error.keyPattern?.email) {
             logger.error("Error creating student",error);
             return res.status(409).json({
                 error: 'Conflict',
-                message: 'User already exists in the system with this email',
+                message: 'Student already exists in the system with this email',
             });
         }
         logger.error("Error creating student",error);

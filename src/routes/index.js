@@ -9,4 +9,9 @@ router.use('/students',studentRoutes);
 router.use('/classes', classRoutes);
 router.use('/teachers', teachersRoutes);
 
+
+router.get('/health', (req, res) => {
+  res.status(200).json({ status: "OK", timestamp: new Date() });
+});
+
 module.exports = router;

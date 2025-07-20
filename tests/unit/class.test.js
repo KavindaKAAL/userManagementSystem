@@ -1,10 +1,10 @@
 const { setupTestEnvironment, teardownTestEnvironment } = require('./testSetup');
-const { clearDatabase } = require('../config/db');
-const { getClasses, getClassById, createClass, updateClass, deleteClass, assignTeacherToClass, unAssignTeacherFromClass } = require('../controllers/classController');
+const { clearDatabase } = require('../../src/utils/db');
+const { getClasses, getClassById, createClass, updateClass, deleteClass, assignTeacherToClass, unAssignTeacherFromClass } = require('../../src/controllers/classController');
 const httpMocks = require('node-mocks-http');
-const Student = require('../models/student');
-const Class = require('../models/class');
-const Teacher = require('../models/teacher');
+const Student = require('../../src/models/student');
+const Class = require('../../src/models/class');
+const Teacher = require('../../src/models/teacher');
 
 // Connect to a new in-memory database before running any tests.
 beforeAll(async ()=>{
@@ -66,10 +66,9 @@ describe("class operations", ()=>{
         const res = httpMocks.createResponse();
 
         await createClass(req,res);
-        
         const res_data = res._getJSONData();
 
-        expect({name:res_data.name , subject:res_data.subject}).toEqual({
+        expect({name:res_data.class.name , subject:res_data.class.subject}).toEqual({
             name: 'Maths-12'.toLowerCase(), 
             subject: 'Chemistry'.toLowerCase()
         })

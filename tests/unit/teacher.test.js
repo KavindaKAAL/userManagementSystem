@@ -1,8 +1,8 @@
 const { setupTestEnvironment, teardownTestEnvironment } = require('./testSetup');
-const { clearDatabase } = require('../config/db');
-const { getTeachers, getTeacherById, createTeacher, updateTeacher, deleteTeacher } = require('../controllers/teacherController');
+const { clearDatabase } = require('../../src/utils/db');
+const { getTeachers, getTeacherById, createTeacher, updateTeacher, deleteTeacher } = require('../../src/controllers/teacherController');
 const httpMocks = require('node-mocks-http');
-const Teacher = require('../models/teacher');
+const Teacher = require('../../src/models/teacher');
 
 
 // Connect to a new in-memory database before running any tests.

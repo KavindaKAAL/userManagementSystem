@@ -1,9 +1,9 @@
 const { setupTestEnvironment, teardownTestEnvironment } = require('./testSetup');
-const { clearDatabase } = require('../config/db');
-const { getStudents, getStudentById, createStudent, updateStudent, deleteStudent, enrollStudentToClass, unEnrollStudentFromClass } = require('../controllers/studentController');
+const { clearDatabase } = require('../../src/utils/db');
+const { getStudents, getStudentById, createStudent, updateStudent, deleteStudent, enrollStudentToClass, unEnrollStudentFromClass } = require('../../src/controllers/studentController');
 const httpMocks = require('node-mocks-http');
-const Student = require('../models/student');
-const Class = require('../models/class');
+const Student = require('../../src/models/student');
+const Class = require('../../src/models/class');
 
 
 // Connect to a new in-memory database before running any tests.
@@ -73,13 +73,16 @@ describe("student operations", ()=>{
         await createStudent(req,res);
 
         expect(res._getJSONData()).toEqual(
-            expect.objectContaining({
-                    _id: expect.any(String),
-                    name: 'Alice'.toLowerCase(),
-                    email: 'alice@example.com',
-                    enrolledClasses: expect.any(Array),
-                    __v: expect.any(Number)
-                })
+                    expect.objectContaining({
+                        message: "Student created successfully",
+                        student: expect.objectContaining({
+                        _id: expect.any(String),
+                        name: "alice",
+                        email: "alice@example.com",
+                        enrolledClasses: expect.any(Array),
+                        __v: expect.any(Number),
+                    }),
+            })
                 
             )
     });

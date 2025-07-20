@@ -1,42 +1,43 @@
 const mongoose = require('mongoose');
+const logger = require('../../logger');
 
 const connectDB = async (uri) => {
   try {
     await mongoose.connect(uri);
-    console.log('MongoDB connected');
+    logger.info('MongoDB connected');
   } catch (error) {
     console.error('MongoDB connection error:', error.message);
     process.exit(1);
   }
 
   mongoose.connection.on('disconnected', () => {
-    console.error('MongoDB disconnected');
+    logger.error('MongoDB disconnected');
   });
 
   mongoose.connection.on('reconnected', () => {
-    console.log('MongoDB reconnected');
+    logger.info('MongoDB reconnected');
   });
 
   mongoose.connection.on('error', (err) => {
-    console.error('MongoDB error:', err.message);
+    logger.error('MongoDB error:', err.message);
   });
 }
 
 const closeDatabase = async () => {
   try {
     await mongoose.connection.close();
-    console.log("MongoDB connection closed.");
+    logger.info("MongoDB connection closed.");
   } catch (error) {
-    console.error(`Error closing database connection: ${error.message}`);
+    logger.error(`Error closing database connection: ${error.message}`);
   }
 };
 
 const dropDatabase = async () => {
   try {
     await mongoose.connection.dropDatabase();
-    console.log("MongoDB database dropped.");
+    logger.info("MongoDB database dropped.");
   } catch (error) {
-    console.error(`Error dropping database: ${error.message}`);
+    logger.error(`Error dropping database: ${error.message}`);
   }
 };
 
@@ -46,9 +47,9 @@ const clearDatabase = async () => {
     for (const collection of collections) {
       await collection.deleteMany({});
     };
-    console.log("MongoDB database collection cleared.");
+    logger.info("MongoDB database collection cleared.");
   } catch (error) {
-    console.error(`Error clearing database collection: ${error.message}`);
+    logger.error(`Error clearing database collection: ${error.message}`);
   }
 };
 

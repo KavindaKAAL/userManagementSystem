@@ -7,7 +7,8 @@ const classSchema = new mongoose.Schema({
         type: String,
         required: true,
         lowercase: true,
-        trim: true
+        trim: true,
+        unique: true,
     },
     subject: {
         type: String,

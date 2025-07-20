@@ -1,8 +1,8 @@
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const {connectDB, closeDatabase, dropDatabase} = require("../config/db");
+const { connectDB, closeDatabase, dropDatabase } = require("../../src/utils/db");
 
-let mongod = undefined;
-let uri = "";
+let mongod;
+let uri;
 
 const setupTestEnvironment = async () => {
   mongod = await MongoMemoryServer.create();
@@ -16,4 +16,4 @@ const teardownTestEnvironment = async () => {
   await mongod.stop();
 };
 
-module.exports = {setupTestEnvironment , teardownTestEnvironment};
+module.exports = { setupTestEnvironment, teardownTestEnvironment };

@@ -20,7 +20,7 @@ afterEach(async ()=>{
 })
 
 describe("teacher operations", ()=>{
-    test("return teachers in the system", async ()=>{
+    test("Should return teachers in the system", async ()=>{
         await Teacher.create({ name: 'Alice', email: 'alice@example.com' });
 
         const req = httpMocks.createRequest();
@@ -40,7 +40,7 @@ describe("teacher operations", ()=>{
             )
     });
 
-    test("return a specific teacher in the system", async ()=>{
+    test("Should return a specific teacher in the system", async ()=>{
     
         await Teacher.create({ name: 'Alice', email: 'alice@example.com' });
         const users = await Teacher.find();
@@ -63,7 +63,7 @@ describe("teacher operations", ()=>{
             )
     });
 
-    test("register a teacher in the system", async ()=>{
+    test("Should register a teacher in the system", async ()=>{
 
         const req = httpMocks.createRequest({method: 'POST',
             body: { name: 'Alice', email: 'alice@example.com' }});
@@ -83,7 +83,7 @@ describe("teacher operations", ()=>{
             )
     });
 
-    test("update a teacher in the system", async ()=>{
+    test("Should update a teacher in the system", async ()=>{
 
         await Teacher.create({ name: 'Alice', email: 'alice@example.com' });
         const users = await Teacher.find();
@@ -108,7 +108,7 @@ describe("teacher operations", ()=>{
             )
     });
 
-    test("delete a teacher from the system", async ()=>{
+    test("Should delete a teacher from the system", async ()=>{
     
         await Teacher.create({ name: 'Alice', email: 'alice@example.com' });
         const users = await Teacher.find();

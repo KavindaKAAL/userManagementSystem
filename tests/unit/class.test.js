@@ -21,7 +21,7 @@ afterEach(async ()=>{
 })
 
 describe("class operations", ()=>{
-    test("return classes in the system", async ()=>{
+    test("Should return classes in the system", async ()=>{
         await Class.create({ name: 'Maths-12', subject: 'Chemistry' });
         const classes = await Class.find();
         
@@ -39,7 +39,7 @@ describe("class operations", ()=>{
                 });
     });
 
-    test("return a specific class in the system", async ()=>{
+    test("Should return a specific class in the system", async ()=>{
     
         await Class.create({ name: 'Maths-12', subject: 'Chemistry' });
         const classes = await Class.find();
@@ -59,7 +59,7 @@ describe("class operations", ()=>{
                 })
     });
 
-    test("register a class in the system", async ()=>{
+    test("Should register a class in the system", async ()=>{
 
         const req = httpMocks.createRequest({method: 'POST',
             body: { name: 'Maths-12', subject: 'Chemistry' }});
@@ -74,7 +74,7 @@ describe("class operations", ()=>{
         })
     });
 
-    test("update a class in the system", async ()=>{
+    test("Should update a class in the system", async ()=>{
 
         await Class.create({ name: 'Maths-12', subject: 'Chemistry' });
         const classes = await Class.find();
@@ -97,7 +97,7 @@ describe("class operations", ()=>{
                 })
     });
 
-    test("delete a class from the system", async ()=>{
+    test("Should delete a class from the system", async ()=>{
     
         await Class.create({ name: 'Maths-12', subject: 'Chemistry' });
         const classes = await Class.find();

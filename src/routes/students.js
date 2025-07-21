@@ -32,7 +32,7 @@ router.post('/',[
     })
   ],createStudent);
 router.put('/',[
-    body('_id').isMongoId().withMessage('Invalid student ID'),
+    body('_id').isMongoId().withMessage('Invalid student ID format'),
     body('name').optional().isString().withMessage('Name must be a string'),
     body('email').optional().isEmail().withMessage('Email must be valid'),
     body().custom(body => {
@@ -52,7 +52,7 @@ router.put('/',[
     next();
   },updateStudent);
 router.delete('/:_id',
-    [param('_id').isMongoId().withMessage('Invalid student ID')],
+    [param('_id').isMongoId().withMessage('Invalid student ID format')],
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -60,6 +60,7 @@ router.delete('/:_id',
     }
     next();
   },deleteStudent);
+  
 router.put('/enroll',enrollStudentToClass);
 router.put('/unenroll',unEnrollStudentFromClass);
 

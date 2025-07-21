@@ -21,7 +21,7 @@ afterEach(async ()=>{
 })
 
 describe("student operations", ()=>{
-    test("return students in the system", async ()=>{
+    test("Should return students in the system", async ()=>{
         await Student.create({ name: 'Alice', email: 'alice@example.com' });
 
         const req = httpMocks.createRequest();
@@ -41,7 +41,7 @@ describe("student operations", ()=>{
             )
     });
 
-    test("return a specific student in the system", async ()=>{
+    test("Should return a specific student in the system", async ()=>{
     
         await Student.create({ name: 'Alice', email: 'alice@example.com' });
         const users = await Student.find();
@@ -64,7 +64,7 @@ describe("student operations", ()=>{
             )
     });
 
-    test("register a student in the system", async ()=>{
+    test("Should register a student in the system", async ()=>{
 
         const req = httpMocks.createRequest({method: 'POST',
             body: { name: 'Alice', email: 'alice@example.com' }});
@@ -87,7 +87,7 @@ describe("student operations", ()=>{
             )
     });
 
-    test("update a student in the system", async ()=>{
+    test("Should update a student in the system", async ()=>{
 
         await Student.create({ name: 'Alice', email: 'alice@example.com' });
         const users = await Student.find();
@@ -112,7 +112,7 @@ describe("student operations", ()=>{
             )
     });
 
-    test("delete a student from the system", async ()=>{
+    test("Should delete a student from the system", async ()=>{
     
         await Student.create({ name: 'Alice', email: 'alice@example.com' });
         const users = await Student.find();
@@ -127,7 +127,7 @@ describe("student operations", ()=>{
         expect(res._getStatusCode()).toEqual(200);
     });
 
-    test("student enroll to a class", async ()=>{
+    test("Should student enroll to a class", async ()=>{
 
         await Student.create({ name: 'Alice', email: 'alice@example.com' });
         await Class.create({ name: 'Maths 8', subject: 'Maths' });
@@ -158,7 +158,7 @@ describe("student operations", ()=>{
         expect(String(updated_classes[0].students[0])).toEqual(student_id);
     });
 
-    test("student un-enroll from a class", async ()=>{
+    test("Should student un-enroll from a class", async ()=>{
 
         await Student.create({ name: 'Alice', email: 'alice@example.com' });
         await Class.create({ name: 'Maths 8', subject: 'Maths' });

@@ -27,7 +27,8 @@ teacherSchema.pre('deleteOne',{document:true, query:false},async (next)=>{
     );
 
     next();
-})
+});
+
 const Teacher = mongoose.model('Teacher', teacherSchema);
 
 module.exports = Teacher;

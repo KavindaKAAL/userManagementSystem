@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-const Student = require('../models/student');
 const Class = require('../models/class');
 const Teacher = require('../models/teacher');
 const logger = require('../../logger');
@@ -123,6 +122,12 @@ const assignTeacherToClass = async (req,res)=>{
             return res.status(404).json({ message: 'Class not found' });
         };
 
+        const isAlreadyAssigned = await Class.findOne(update_teacher);
+
+        if (isAlreadyAssigned){
+            logger.info("Teacher is already assigned to the class");
+            return res.status(409).json({status: "error", message: "Teacher is already assigned to the class"})
+        }
             
         const session = await mongoose.startSession();
         session.startTransaction();
@@ -179,6 +184,12 @@ const unAssignTeacherFromClass = async (req,res)=>{
             return res.status(404).json({ message: 'Class not found' });
         };
 
+        const isAlreadyAssigned = await Class.findOne(update_teacher);
+
+        if (!isAlreadyAssigned){
+            logger.info("Teacher is not already assigned to the class");
+            return res.status(409).json({status: "error", message: "Teacher is not already assigned to the class"})
+        }
 
         const session = await mongoose.startSession();
         session.startTransaction();

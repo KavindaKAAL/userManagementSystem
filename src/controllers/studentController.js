@@ -121,6 +121,13 @@ const enrollStudentToClass = async (req,res)=>{
             return res.status(404).json({ message: 'Class not found' });
         }
 
+        const isAlreadyEnrolled = await Student.findOne({_id: studentId, enrolledClasses: { $in: [classId] }});
+
+        if (isAlreadyEnrolled){
+            logger.info("Student is already enrolled in this class");
+            return res.status(409).json({status: "error", message: "Student is already enrolled in this class"})
+        }
+
         const session = await mongoose.startSession();
         session.startTransaction();
 
@@ -173,6 +180,14 @@ const unEnrollStudentFromClass = async (req,res)=>{
         if (!course) {
             return res.status(404).json({ message: 'Class not found' });
         }
+
+        const isAlreadyEnrolled = await Student.findOne({_id: studentId, enrolledClasses: { $in: [classId] }});
+
+        if (!isAlreadyEnrolled){
+            logger.info("Student is not already enrolled in this class");
+            return res.status(409).json({status: "error", message: "Student is not already enrolled in this class"})
+        }
+
 
         const session = await mongoose.startSession();
         session.startTransaction();

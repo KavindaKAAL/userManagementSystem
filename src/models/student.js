@@ -26,7 +26,8 @@ studentSchema.pre('deleteOne', {document:true, query:false},async function(next)
         {$pull:{students:studentId}}
     );
     next();
-})
+});
+
 const Student = mongoose.model('Student', studentSchema);
 
 module.exports = Student;

@@ -8,7 +8,9 @@
         "test:e2e": "NODE_ENV=test jest --selectProjects e2e --runInBand --detectOpenHandles",
         "e2e:test": "npm run docker:test:up && npm run test:e2e && npm run docker:test:down",
         "docker:test:up": "NODE_ENV=test docker compose up -d --build --remove-orphans",
-        "docker:test:down": "NODE_ENV=test docker compose down --volumes --remove-orphans"
+        "docker:test:down": "NODE_ENV=test docker compose down --volumes --remove-orphans",
+        "docker:default:up": "docker compose up -d --build --remove-orphans",
+        "docker:default:down": "docker compose down --volumes --remove-orphans"
     },
     "devDependencies": {
         "jest": "^30.0.4",
